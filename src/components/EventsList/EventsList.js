@@ -4,7 +4,7 @@ import { addToFavorites, deleteFromFavorites } from '../../AC/';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { favoritesEventsSelector } from '../../selectors';
-const EventsList = ({ events, favorites, addToFavorites, deleteFromFavorites, isFull, history }) => {
+const EventsList = ({ events, favorites, addToFavorites, deleteFromFavorites, history }) => {
 	const changeFavoriteState = (isFavorite, id) => {
 		if (!isFavorite) {
 			addToFavorites(id);
@@ -14,12 +14,7 @@ const EventsList = ({ events, favorites, addToFavorites, deleteFromFavorites, is
 	};
 	const Events = events.map((event) => (
 		<li className="events-list__item" key={event.id}>
-			<Event
-				event={event}
-				changeFavoriteState={changeFavoriteState}
-				isFull={isFull}
-				isFavorite={favorites.includes(event)}
-			/>
+			<Event event={event} changeFavoriteState={changeFavoriteState} isFavorite={favorites.includes(event)} />
 		</li>
 	));
 

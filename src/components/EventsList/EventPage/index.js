@@ -8,7 +8,7 @@ const EventPage = ({ events, match }) => {
 	const event = events.filter((event) => event.id === +id);
 	return (
 		<div className="main">
-			<EventsList events={event} isFull={true} />
+			<EventsList events={event} />
 		</div>
 	);
 };

@@ -1,8 +1,9 @@
 import React from 'react';
 import './style.less';
-import { NavLink } from 'react-router-dom';
 
-const Event = ({ event, changeFavoriteState, isFull, isFavorite }) => {
+import { NavLink, withRouter } from 'react-router-dom';
+
+const Event = ({ event, changeFavoriteState, isFavorite, history }) => {
 	const style = {
 		fill: isFavorite ? '#000' : '#fff',
 		stroke: '#000',
@@ -10,7 +11,7 @@ const Event = ({ event, changeFavoriteState, isFull, isFavorite }) => {
 		width: '20px',
 		height: '20px'
 	};
-	return ( event  ?
+	return event ? (
 		<div className="event">
 			<h3 className="event__title">{event.title}</h3>
 			<div className="event__info">
@@ -32,10 +33,8 @@ const Event = ({ event, changeFavoriteState, isFull, isFavorite }) => {
 				</button>
 			</div>
 			<p className="event__body">
-				{event.image ? (
-					<img src={event.image} alt={event.title} className="event__img" />
-				) : null}
-				{isFull ? (
+				{event.image ? <img src={event.image} alt={event.title} className="event__img" /> : null}
+				{history.location.pathname === `/${event.id}` ? (
 					<span>{event.body}</span>
 				) : (
 					<span>
@@ -46,8 +45,10 @@ const Event = ({ event, changeFavoriteState, isFull, isFavorite }) => {
 					</span>
 				)}
 			</p>
-		</div> : <div>Тут пусто</div>
+		</div>
+	) : (
+		<div>Тут пусто</div>
 	);
 };
 
-export default Event;
+export default withRouter(Event);
